@@ -69,5 +69,139 @@ function renderRides(ridesArray) {
 
 window.addEventListener('DOMContentLoaded', function() {
   // YOUR CODE
+
+
+  // find all the ride buttons using querySelectorAll and a selector matching all of the desired elements
+  let allButtons = document.querySelectorAll('.filter-button')
+
+  //console.log(allButtons.length)
+
+  // loop through each ride button
+  for (let i = 0; i < allButtons.length; i++) {
+    let rideButton = allButtons[i];
+    //console.log(rideButton)
+    
+    // add the event listener and function to each ride button
+
+    rideButton.addEventListener('click', async function(event) {
+      event.preventDefault() // supress the browser's default click behavior
+
+      document.querySelector('.filter-button').innerHTML = '' // clearing any existing button value from a previous click
+
+      let rideType = event.target.innerHTML
+
+      console.log(rideType)
+
+
+      // get all of the ride data
+      let response = await fetch('https://kiei451.com/api/rides.json')
+      let json = await response.json()
+      let rides = json
+
+      // initialize new blank array to hold the filtered results, depending on which button was clicked
+      let filteredRides = []
+
+      
+
+      // depending on which button was clicked, filter the results that will display
+      if(rideType == 'Noober Purple') {
+
+        for(i = 0; i < rides.length; i++){
+
+          if(levelOfService(rides[i]) == 'Noober Purple') {
+            //console.log('new purple ride')
+            //console.log(rides[i])
+
+            filteredRides.push(rides[i])
+
+
+          }
+        }
+
+      } else if(rideType == 'Noober Pool') {
+        //console.log(rideType)
+
+        for(i = 0; i < rides.length; i++){
+
+          if(levelOfService(rides[i]) == 'Noober Pool') {
+            //console.log('new purple ride')
+            //console.log(rides[i])
+
+            filteredRides.push(rides[i])
+
+
+          }
+        }
+
+      } else if(rideType == 'Noober X') {
+
+        for(i = 0; i < rides.length; i++){
+
+          if(levelOfService(rides[i]) == 'Noober X') {
+            //console.log('new purple ride')
+            //console.log(rides[i])
+
+            filteredRides.push(rides[i])
+
+
+          }
+        }
+
+      } else if(rideType == 'Noober XL') {
+
+        for(i = 0; i < rides.length; i++){
+
+          if(levelOfService(rides[i]) == 'Noober XL') {
+            //console.log('new purple ride')
+            //console.log(rides[i])
+
+            filteredRides.push(rides[i])
+
+
+          }
+        }
+
+      }  
+
+
+      
+      renderRides(filteredRides)
+      
+        
+
+
+
+
+
+
+    })
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
