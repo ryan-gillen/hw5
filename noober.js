@@ -13,8 +13,17 @@ function levelOfService(ride) {
 }
 
 function renderRides(ridesArray) {
+  
+  //------Ryan's additional code start-----------
+  //let ride = []
+  //ride.splice(0, ride.length)
+
+  //------Ryan's additional code end-----------
+  
   for (let i = 0; i < ridesArray.length; i++) {
     let ride = ridesArray[i]
+    //ride = ridesArray[i]
+
 
     document.querySelector('.rides').insertAdjacentHTML('beforeend', `
       <h1 class="inline-block mt-8 px-4 py-2 rounded-xl text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
@@ -65,6 +74,7 @@ function renderRides(ridesArray) {
       `)
     }
   }
+  
 }
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -74,23 +84,26 @@ window.addEventListener('DOMContentLoaded', function() {
   // find all the ride buttons using querySelectorAll and a selector matching all of the desired elements
   let allButtons = document.querySelectorAll('.filter-button')
 
-  //console.log(allButtons.length)
-
-  // loop through each ride button
+  // loop through each ride button - ***is this the right place for this?
   for (let i = 0; i < allButtons.length; i++) {
     let rideButton = allButtons[i];
-    //console.log(rideButton)
     
-    // add the event listener and function to each ride button
+    
 
+
+    
+
+    // add the event listener and function to each ride button
     rideButton.addEventListener('click', async function(event) {
       event.preventDefault() // supress the browser's default click behavior
 
-      document.querySelector('.filter-button').innerHTML = '' // clearing any existing button value from a previous click
+      
 
       let rideType = event.target.innerHTML
+      //rideType = event.target.innerHTML
 
-      console.log(rideType)
+      //output which ride button was pushed to the console
+      //console.log(rideType)
 
 
       // get all of the ride data
@@ -98,109 +111,89 @@ window.addEventListener('DOMContentLoaded', function() {
       let json = await response.json()
       let rides = json
 
-      // initialize new blank array to hold the filtered results, depending on which button was clicked
-      let filteredRides = []
+      // initialize new blank arrays to hold the filtered results, depending on which button was clicked
+      let NooberPurpleFilteredRides = []
+      let NooberPoolFilteredRides = []
+      let NooberXFilteredRides = []
+      let NooberXLFilteredRides = []
+      let AllFilteredRides = []
 
-      
-
-      // depending on which button was clicked, filter the results that will display
+      // depending on which button was clicked, filter the results that will display by adding to the new blank array
       if(rideType == 'Noober Purple') {
+        console.log(rideType)
+        //filteredRides.length = 0
 
         for(i = 0; i < rides.length; i++){
-
           if(levelOfService(rides[i]) == 'Noober Purple') {
-            //console.log('new purple ride')
-            //console.log(rides[i])
-
-            filteredRides.push(rides[i])
-
+            NooberPurpleFilteredRides.push(rides[i])
+            
 
           }
         }
+        renderRides(NooberPurpleFilteredRides)
 
       } else if(rideType == 'Noober Pool') {
-        //console.log(rideType)
+        console.log(rideType)
+        //filteredRides.length = 0
 
         for(i = 0; i < rides.length; i++){
-
           if(levelOfService(rides[i]) == 'Noober Pool') {
-            //console.log('new purple ride')
-            //console.log(rides[i])
-
-            filteredRides.push(rides[i])
-
-
+            NooberPoolFilteredRides.push(rides[i])
+            
           }
+          
         }
+        renderRides(NooberPoolFilteredRides)
 
       } else if(rideType == 'Noober X') {
+        console.log(rideType)
+        //filteredRides.length = 0
 
         for(i = 0; i < rides.length; i++){
-
           if(levelOfService(rides[i]) == 'Noober X') {
-            //console.log('new purple ride')
-            //console.log(rides[i])
-
-            filteredRides.push(rides[i])
-
-
+            NooberXFilteredRides.push(rides[i])
+            
           }
+          
         }
+        renderRides(NooberXFilteredRides)
 
       } else if(rideType == 'Noober XL') {
+        console.log(rideType)
+        //filteredRides.length = 0
 
         for(i = 0; i < rides.length; i++){
-
           if(levelOfService(rides[i]) == 'Noober XL') {
-            //console.log('new purple ride')
-            //console.log(rides[i])
-
-            filteredRides.push(rides[i])
-
+            NooberXLFilteredRides.push(rides[i])
+            
 
           }
+          
         }
+        renderRides(NooberXLFilteredRides)
 
-      }  
+      } else if(rideType == 'All Rides') {
+        console.log(rideType)
+        //filteredRides.length = 0
+
+        for(i = 0; i < rides.length; i++){
+          AllFilteredRides.push(rides[i])
+        
+        }
+        renderRides(AllFilteredRides)
+
+      } 
 
 
-      
-      renderRides(filteredRides)
+
+      // outputing the filtered list to the screen
+      //renderRides(filteredRides)
+      //filteredRides = []
       
         
-
-
-
-
-
-
     })
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 })
